@@ -17,7 +17,7 @@
  limitations under the License.
 -%>
 package <%= entityAbsolutePackage %>.web.rest;
-
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 <%_
 const viaService = !serviceNo;
 _%>
@@ -128,6 +128,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 /**
  * REST controller for managing {@link <%= entityAbsolutePackage %>.domain.<%= persistClass %>}.
  */
+@ConditionalOnExpression("${web.rest.<%= entityClass %>Resource.enabled:false}")
 @RestController
 @RequestMapping("/api")
 <%_ if (databaseTypeSql && !viaService && !saveUserSnapshot) { _%>

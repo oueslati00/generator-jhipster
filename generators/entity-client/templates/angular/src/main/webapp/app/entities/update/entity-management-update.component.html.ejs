@@ -191,9 +191,18 @@ _%>
 
                 <div class="row mb-3">
                     <label <%= jhiPrefix %>Translate="<%= translationKey %>" for="field_<%= relationshipFieldNamePlural %>"><%- this._getEntityClientTranslation(translationKey) %></label>
-                    <select class="form-control" id="field_<%= relationshipFieldNamePlural %>" data-cy="<%= relationshipFieldName %>" multiple name="<%= relationshipFieldNamePlural %>" formControlName="<%= relationshipFieldNamePlural %>">
-                        <option [ngValue]="getSelected<%= relationship.otherEntity.entityAngularName %>(<%= otherEntityName %>Option, editForm.get('<%= relationshipFieldNamePlural %>')!.value)" *ngFor="let <%= otherEntityName %>Option of <%= otherEntity.entityInstancePlural %>SharedCollection; trackBy: track<%= relationship.otherEntity.entityAngularName %>By<%= relationship.otherEntity.primaryKey.nameCapitalized %>">{{ <%= otherEntityName %>Option.<%= otherEntityField %> }}</option>
-                    </select>
+                    <ng-select
+                            [items]="<%= otherEntity.entityInstancePlural%>SharedCollection"
+                            bindLabel="<%= otherEntityField%>"
+                            [multiple]="true"
+                            [clearable]="true"
+                            formControlName="<%= relationshipFieldNamePlural%>"
+                            class="form-control"
+                            id="field_<%= relationshipFieldNamePlural %>"
+                            data-cy="<%= relationshipFieldName %>"
+                            multiple name="<%= relationshipFieldNamePlural %>"
+                            formControlName="<%= relationshipFieldNamePlural %>">
+                    </ng-select>
                 </div>
     <%_ } _%>
     <%_ if (relationship.relationshipValidate && (relationship.relationshipManyToOne || ownerSide)) { _%>

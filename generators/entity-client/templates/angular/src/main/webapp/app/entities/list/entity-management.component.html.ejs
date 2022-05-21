@@ -167,7 +167,7 @@ _%>
                     <td class="text-end">
                         <div class="btn-group">
 <%_ for (const relationship of relationships.filter(rel => !rel.otherEntityIsEmbedded)) { _%>
-    <%_ if (relationship.otherEntity.jpaMetamodelFiltering && relationship.otherEntity.paginationPagination && (relationship.relationshipOneToMany || relationship.relationshipManyToMany) && !relationship.ownerSide) { 
+    <%_ if (relationship.otherEntity.jpaMetamodelFiltering && relationship.otherEntity.paginationPagination && (relationship.relationshipOneToMany || relationship.relationshipManyToMany) && !relationship.ownerSide) {
         const otherEntityTranslationKey = i18nKeyPrefix + '.' + relationship.relationshipName;
     _%>
                             <button type="submit"
@@ -213,12 +213,23 @@ _%>
 <%_ if (paginationPagination) { _%>
 
     <div *ngIf="<%= entityInstancePlural %> && <%= entityInstancePlural %>.length > 0">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-start">
             <<%= jhiPrefixDashed %>-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></<%= jhiPrefixDashed %>-item-count>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        <div class="d-flex justify-content-end">
+            <ngb-pagination
+                    [collectionSize]="totalItems"
+                    [(page)]="ngbPaginationPage"
+                    [pageSize]="itemsPerPage"
+                    [maxSize]="5"
+                    [rotate]="true"
+                    (pageChange)="loadPage($event)">
+                <ng-template ngbPaginationPrevious>Prev</ng-template>
+                <ng-template ngbPaginationNext>Next</ng-template>
+                <ng-template ngbPaginationEllipsis>...</ng-template>
+                <ng-template ngbPaginationNumber let-page>{{page}}</ng-template>
+            </ngb-pagination>
         </div>
     </div>
 <%_ } _%>

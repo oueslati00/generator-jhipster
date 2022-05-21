@@ -39,6 +39,7 @@
     "@fortawesome/fontawesome-svg-core": "<%= dependabotPackageJson.dependencies['@fortawesome/fontawesome-svg-core'] %>",
     "@fortawesome/free-solid-svg-icons": "<%= dependabotPackageJson.dependencies['@fortawesome/free-solid-svg-icons'] %>",
     "@ng-bootstrap/ng-bootstrap": "<%= dependabotPackageJson.dependencies['@ng-bootstrap/ng-bootstrap'] %>",
+    "@ng-select/ng-bootstrap":"<%= dependabotPackageJson.dependencies['@ng-select/ng-select']%>,
 <%_ if (enableTranslation) { _%>
     "@ngx-translate/core": "<%= dependabotPackageJson.dependencies['@ngx-translate/core'] %>",
     "@ngx-translate/http-loader": "<%= dependabotPackageJson.dependencies['@ngx-translate/http-loader'] %>",
@@ -110,7 +111,7 @@
     "eslint-config-prettier": "<%= dependabotPackageJson.devDependencies['eslint-config-prettier'] %>",
     "eslint-webpack-plugin": "<%= dependabotPackageJson.devDependencies['eslint-webpack-plugin'] %>",
 <%_ if (!skipJhipsterDependencies) { _%>
-    "generator-jhipster": "<%= packagejs.version %>",
+    "generator-jhipster": "file:./generator-jhipster",
     <%_ otherModules.forEach(module => { _%>
     "<%= module.name %>": "<%= module.version %>",
     <%_ });

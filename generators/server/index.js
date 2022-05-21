@@ -601,6 +601,7 @@ module.exports = class JHipsterServerGenerator extends BaseBlueprintGenerator {
           'java:jar:prod': 'npm run java:jar -- -Pprod',
           'java:war:dev': 'npm run java:war -- -Pdev,webapp',
           'java:war:prod': 'npm run java:war -- -Pprod',
+          'jdl:update' :'jhipster jdl src/main/jdl/entities.jdl',
           'java:docker:dev': 'npm run java:docker -- -Pdev,webapp',
           'java:docker:prod': 'npm run java:docker -- -Pprod',
           'ci:backend:test':
