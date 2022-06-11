@@ -51,7 +51,7 @@
 _%>
 
 <%_ for (const bean of beans) { _%>
-    private final <%= bean.class %> <%= bean.instance %>;
+    protected final <%= bean.class %> <%= bean.instance %>;
 
 <%_ } _%>
     public <%= constructorName %>(

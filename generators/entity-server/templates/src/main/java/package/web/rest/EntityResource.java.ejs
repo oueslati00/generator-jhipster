@@ -24,6 +24,7 @@ _%>
 <%_ if (!dtoMapstruct || serviceNo) { _%>
 import <%= entityAbsolutePackage %>.domain.<%= persistClass %>;
 <%_ } _%>
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import <%= entityAbsolutePackage %>.repository.<%= entityClass %>Repository;
 <%_ if (!serviceNo) { _%>
 import <%= entityAbsolutePackage %>.service.<%= entityClass %>Service;
@@ -129,23 +130,24 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  * REST controller for managing {@link <%= entityAbsolutePackage %>.domain.<%= persistClass %>}.
  */
 @RestController
+@ConditionalOnMissingClass(value = "com.mycompany.myapp.web.rest.<%= entityClass %>ResourceExtend")
 @RequestMapping("/api")
 <%_ if (databaseTypeSql && !viaService && !saveUserSnapshot) { _%>
 @Transactional
 <%_ } _%>
 public class <%= entityClass %>Resource {
 
-    private final Logger log = LoggerFactory.getLogger(<%= entityClass %>Resource.class);
+    protected final Logger log = LoggerFactory.getLogger(<%= entityClass %>Resource.class);
 <%_ if (!readOnly) { _%>
 
   <%_ let entityName = entityInstance;
   if (clientRootFolder && !skipUiGrouping) {
     entityName = _.camelCase(`${clientRootFolder}${entityClass}`);
   } _%>
-    private static final String ENTITY_NAME = "<%= entityName %>";
+    protected static final String ENTITY_NAME = "<%= entityName %>";
 
     @Value("${jhipster.clientApp.name}")
-    private String applicationName;
+    protected String applicationName;
 <%_ } _%>
     <%_
     const instanceType = restClass;
